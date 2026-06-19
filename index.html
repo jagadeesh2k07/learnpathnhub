@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LearnKit — Offline Learning Platform</title>
+<link rel="icon" type="image/png" href="learnkit-favicon.png">
+<meta name="description" content="LearnKit: an offline learning platform with courses, journey, assignments and a personal profile." />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="app">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-logo">LK</div>
+      <div>
+        <div class="brand-name">LearnKit</div>
+        <div class="brand-sub">Offline Learning Kit</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="#" class="nav-item active" data-target="home"><span class="ico">🏠</span> Home</a>
+      <a href="#" class="nav-item" data-target="courses"><span class="ico">📚</span> Courses</a>
+      <a href="#" class="nav-item" data-target="journey"><span class="ico">🗺️</span> Journey</a>
+      <a href="#" class="nav-item" data-target="assignments"><span class="ico">📝</span> Assignments</a>
+      <a href="#" class="nav-item" data-target="profile"><span class="ico">👤</span> Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="avatar">KJ</div>
+      <div class="avatar-info">
+        <div class="n">K Jagadeesh</div>
+        <div class="e">Year 2 · CS</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main">
+    <header class="topbar">
+      <div style="display:flex;align-items:center;gap:12px">
+        <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+        <div class="search">
+          <span>🔍</span>
+          <input type="text" placeholder="Search courses, topics, notes…" />
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn" aria-label="Notifications">🔔<span class="dot"></span></button>
+        <div class="avatar">KJ</div>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <!-- HOME -->
+      <section class="page active" data-page="home">
+        <div class="hero" id="homeHero"></div>
+        <div class="grid grid-4" id="homeStats" style="margin-bottom:22px"></div>
+        <div class="grid grid-main">
+          <div class="card"><h3>Course Progress</h3><div id="courseProgress"></div></div>
+          <div class="card"><h3>Recently Watched</h3><div class="list" id="recentVideos"></div></div>
+        </div>
+        <div class="card" style="margin-top:18px"><h3>Pending Assignments & Quizzes</h3><div class="list" id="pendingTasks"></div></div>
+      </section>
+
+      <!-- COURSES -->
+      <section class="page" data-page="courses">
+        <div class="page-header">
+          <h1>Courses</h1>
+          <p>B.Tech Computer Science · Year 2 · Semester 1</p>
+        </div>
+        <div class="subjects-layout">
+          <div class="card"><h3>Subjects</h3><div id="subjectList"></div></div>
+          <div id="subjectDetail"></div>
+        </div>
+      </section>
+
+      <!-- JOURNEY -->
+      <section class="page" data-page="journey">
+        <div class="page-header">
+          <h1>Your Journey</h1>
+          <p>Track your roadmap, courses, doubts and pending work.</p>
+        </div>
+        <div class="grid grid-main">
+          <div class="card"><h3>Roadmap</h3><div id="journeyRoadmap"></div></div>
+          <div>
+            <div class="card" style="margin-bottom:18px"><h3>Currently Studying</h3><div id="journeyCurrent"></div></div>
+            <div class="card"><h3>Upcoming Courses</h3><div class="list" id="journeyUpcoming"></div></div>
+          </div>
+        </div>
+        <div class="grid grid-2" style="margin-top:18px">
+          <div class="card"><h3>Completed Courses</h3><div class="list" id="journeyCompleted"></div></div>
+          <div class="card"><h3>Pending Assignments / Quizzes</h3><div class="list" id="journeyPending"></div></div>
+        </div>
+        <div class="card" style="margin-top:18px">
+          <h3>Ask a Doubt</h3>
+          <div style="display:flex;gap:10px;margin-bottom:14px">
+            <input type="text" placeholder="Type your question…" style="flex:1;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font:inherit" />
+            <button class="btn">Submit</button>
+          </div>
+          <div id="journeyDoubts"></div>
+        </div>
+      </section>
+
+      <!-- ASSIGNMENTS -->
+      <section class="page" data-page="assignments">
+        <div class="page-header">
+          <h1>Assignments & Quizzes</h1>
+          <p>Track your pending work, results and performance analysis.</p>
+        </div>
+        <div class="tabs">
+          <div class="tab active" data-tab="pending">Pending</div>
+          <div class="tab" data-tab="completed">Completed</div>
+          <div class="tab" data-tab="analysis">Analysis</div>
+        </div>
+        <div class="tab-panel active" data-panel="pending"><div class="card"><div class="list" id="assignPending"></div></div></div>
+        <div class="tab-panel" data-panel="completed"><div class="card"><div class="list" id="assignCompleted"></div></div></div>
+        <div class="tab-panel" data-panel="analysis"><div class="card"><h3>Performance by Subject</h3><div id="assignAnalysis"></div></div></div>
+      </section>
+
+      <!-- PROFILE -->
+      <section class="page" data-page="profile">
+        <div class="profile-header" id="profileHeader"></div>
+        <div class="grid grid-4" id="profileStats" style="margin-bottom:22px"></div>
+        <div class="grid grid-2">
+          <div class="card"><h3>Personal Information</h3><div id="profileInfo"></div></div>
+          <div class="card">
+            <h3>⚙️ Settings</h3>
+            <div class="setting-row">
+              <div class="label"><div class="t">Email Notifications</div><div class="s">Daily reminders & updates</div></div>
+              <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
+            </div>
+            <div class="setting-row">
+              <div class="label"><div class="t">Dark Mode</div><div class="s">Use a darker theme</div></div>
+              <label class="switch"><input type="checkbox" /><span class="slider"></span></label>
+            </div>
+            <div class="setting-row">
+              <div class="label"><div class="t">Offline Sync</div><div class="s">Download content when on Wi-Fi</div></div>
+              <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
+            </div>
+            <div class="setting-row">
+              <div class="label"><div class="t">Language</div><div class="s">Choose your preferred language</div></div>
+              <select style="padding:6px 10px;border-radius:8px;border:1px solid var(--border);font:inherit">
+                <option>English</option><option>Hindi</option><option>Telugu</option><option>Tamil</option>
+              </select>
+            </div>
+            <div style="display:flex;gap:10px;margin-top:16px">
+              <button class="btn outline">Edit Profile</button>
+              <button class="btn outline">Change Password</button>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-2" style="margin-top:18px">
+          <div class="card"><h3>Personal Notes</h3><div id="profileNotes"></div></div>
+          <div class="card"><h3>My Doubts</h3><div id="profileDoubts"></div></div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
