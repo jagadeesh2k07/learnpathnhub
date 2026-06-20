@@ -1,8 +1,5 @@
-// LearnKit app logic
 const $ = (s, p = document) => p.querySelector(s);
 const $$ = (s, p = document) => [...p.querySelectorAll(s)];
-
-// Navigation
 function showPage(name) {
   $$(".page").forEach(p => p.classList.toggle("active", p.dataset.page === name));
   $$(".nav-item").forEach(n => n.classList.toggle("active", n.dataset.target === name));
@@ -11,8 +8,6 @@ function showPage(name) {
 }
 $$(".nav-item").forEach(n => n.addEventListener("click", e => { e.preventDefault(); showPage(n.dataset.target); }));
 $("#menuToggle")?.addEventListener("click", () => $(".sidebar").classList.toggle("open"));
-
-// Tabs
 function bindTabs(root) {
   $$(".tabs", root).forEach(group => {
     const tabs = $$(".tab", group);
@@ -28,8 +23,6 @@ function bindTabs(root) {
     }));
   });
 }
-
-// ===== HOME =====
 function renderHome() {
   const pending = ASSIGNMENTS.filter(a => a.status === "pending");
   const completed = ASSIGNMENTS.filter(a => a.status === "completed");
@@ -73,8 +66,6 @@ function renderHome() {
       <span class="tag amber">${a.type}</span>
     </div>`).join("");
 }
-
-// ===== COURSES =====
 let activeSubjectId = SUBJECTS[0].id;
 function renderCourses() {
   $("#subjectList").innerHTML = SUBJECTS.map(s => `
@@ -121,8 +112,6 @@ function renderCourses() {
   `;
   bindTabs($("#subjectDetail"));
 }
-
-// ===== JOURNEY =====
 function renderJourney() {
   $("#journeyRoadmap").innerHTML = `
     <div class="roadmap">
@@ -169,8 +158,6 @@ function renderJourney() {
       <span class="tag amber">${a.type}</span>
     </div>`).join("");
 }
-
-// ===== ASSIGNMENTS =====
 function renderAssignments() {
   const pending = ASSIGNMENTS.filter(a => a.status === "pending");
   const completed = ASSIGNMENTS.filter(a => a.status === "completed");
@@ -190,8 +177,6 @@ function renderAssignments() {
       <span class="tag ${pct>=85?"green":pct>=70?"blue":"amber"}">${a.type}</span>
     </div>`;
   }).join("");
-
-  // Analysis by subject
   const bySubject = {};
   completed.forEach(a => {
     if (!bySubject[a.subject]) bySubject[a.subject] = { total: 0, score: 0, count: 0 };
@@ -209,8 +194,6 @@ function renderAssignments() {
     </div>`;
   }).join("");
 }
-
-// ===== PROFILE =====
 function renderProfile() {
   $("#profileHeader").innerHTML = `
     <div class="avatar big">${STUDENT.initials}</div>
@@ -245,8 +228,6 @@ function renderProfile() {
     <div class="note"><div class="t">${d.q}</div><div class="b">${d.subject} · ${d.answered?"Answered":"Open"}</div><div class="d">${d.date}</div></div>
   `).join("");
 }
-
-// Init
 document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", () => {
   $(".topbar").classList.toggle("scrolled", window.scrollY > 4);
