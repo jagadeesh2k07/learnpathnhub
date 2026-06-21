@@ -43,20 +43,26 @@ function renderHome() {
     { l: "Streak", v: STUDENT.stats.streakDays + "d", d: "Keep it up!" },
   ].map(s => `<div class="stat"><div class="label">${s.l}</div><div class="value">${s.v}</div><div class="delta">${s.d}</div></div>`).join("");
 
-  $("#courseProgress").innerHTML = SUBJECTS.map(s => `
-    <div style="margin-bottom:14px">
-      <div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:6px">
-        <span>${s.emoji} ${s.name}</span><span style="color:var(--muted)">${s.progress}%</span>
+$("#courseProgress").innerHTML = SUBJECTS.map(s => {
+    const tier = s.progress >= 70 ? "high" : s.progress >= 40 ? "mid" : "low";
+    return `
+    <div class="progress-row ${tier}">
+      <div class="row-top">
+        <span>${s.emoji} ${s.name}</span><span class="pct">${s.progress}%</span>
       </div>
-      <div class="progress"><span style="width:${s.progress}%"></span></div>
-    </div>
-  `).join("");
+      <div class="progress"><span style="--fill:${s.progress}%"></span></div>
+    </div>`;
+  }).join("");
+
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    $$("#courseProgress .progress > span").forEach(el => el.classList.add("filled"));
+  }));
 
   $("#recentVideos").innerHTML = RECENTLY_WATCHED.map(v => `
     <div class="list-item">
-      <div class="thumb">▶</div>
+      <div class="thumb play">▶</div>
       <div class="meta"><div class="t">${v.title}</div><div class="s">${v.subject} · ${v.duration}</div></div>
-      <span class="tag green">${v.progress}%</span>
+      <span class="tag ${v.progress === 100 ? "green" : "blue"}">${v.progress === 100 ? "✓ Done" : v.progress + "%"}</span>
     </div>`).join("");
 
   $("#pendingTasks").innerHTML = pending.map(a => `

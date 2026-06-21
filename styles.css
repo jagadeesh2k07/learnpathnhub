@@ -311,10 +311,27 @@ img { max-width: 100%; display: block; }
 }
 .progress > span {
   display: block; height: 100%;
+  width: 0;
   background: linear-gradient(90deg, var(--primary), var(--accent-dark));
   border-radius: 999px;
-  transition: width .5s var(--ease);
+  transition: width .8s var(--ease);
 }
+.progress > span.filled { width: var(--fill, 0%); }
+
+.progress-row { margin-bottom: 14px; }
+.progress-row:last-child { margin-bottom: 0; }
+.progress-row .row-top {
+  display: flex; justify-content: space-between;
+  font-size: 14px; margin-bottom: 6px;
+}
+.progress-row .row-top .pct {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--muted);
+}
+.progress-row.high .row-top .pct { color: var(--success); }
+.progress-row.mid  .row-top .pct { color: var(--primary-dark); }
+.progress-row.low  .row-top .pct { color: var(--danger); }
 
 .list { display: flex; flex-direction: column; gap: 10px; }
 .list-item {
@@ -331,6 +348,14 @@ img { max-width: 100%; display: block; }
   display: grid; place-items: center;
   color: var(--primary-dark); font-weight: 600;
   flex-shrink: 0;
+}
+.thumb.play {
+  transition: background var(--speed) var(--ease), color var(--speed) var(--ease), transform var(--speed) var(--ease);
+}
+.list-item:hover .thumb.play {
+  background: var(--primary);
+  color: white;
+  transform: scale(1.08);
 }
 .list-item .meta { flex: 1; min-width: 0; }
 .list-item .meta .t { font-size: 14px; font-weight: 500; }
