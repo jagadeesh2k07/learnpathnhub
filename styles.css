@@ -420,13 +420,57 @@ img { max-width: 100%; display: block; }
   padding: 12px;
   border-radius: var(--radius-sm);
   margin-bottom: 6px;
-  transition: background var(--speed) var(--ease);
+  border: 1px solid transparent;
+  position: relative;
+  transition: background var(--speed) var(--ease), border-color var(--speed) var(--ease), transform var(--speed) var(--ease);
 }
-.subject-btn:hover { background: var(--surface-2); }
-.subject-btn.active { background: var(--primary-soft); }
-.subject-btn .em { font-size: 22px; }
+.subject-btn:hover {
+  background: var(--surface-2);
+  transform: translateX(2px);
+}
+.subject-btn.active {
+  background: var(--primary-soft);
+  border-color: var(--primary);
+}
+.subject-btn.active::after {
+  content: "›";
+  position: absolute;
+  right: 12px;
+  color: var(--primary-dark);
+  font-size: 18px;
+  font-weight: 700;
+}
+.subject-btn .em {
+  font-size: 22px;
+  transition: transform var(--speed) var(--ease);
+}
+.subject-btn:hover .em { transform: scale(1.15); }
 .subject-btn .info { flex: 1; min-width: 0; }
 .subject-btn .info .n { font-size: 14px; font-weight: 600; }
+.subject-btn .info .pct {
+  font-size: 11px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  margin-top: 2px;
+}
+
+.subject-hero {
+  display: flex; align-items: center; gap: 14px;
+  padding: 18px 20px;
+  background: linear-gradient(135deg, var(--primary-soft), var(--accent));
+  border-radius: var(--radius-sm);
+  margin-bottom: 16px;
+}
+.subject-hero .em-big { font-size: 36px; }
+.subject-hero h3 { margin: 0; font-size: 18px; }
+.subject-hero .sub-meta { color: var(--muted); font-size: 13px; margin-top: 2px; }
+.subject-hero .subject-progress { margin-top: 10px; }
+
+.list-item.watched { opacity: 0.7; }
+.list-item.watched .thumb { background: var(--surface-2); color: var(--muted); }
+.list-item.watched .meta .t { text-decoration: line-through; color: var(--muted); }
+
+.tab:hover { color: var(--text); cursor: pointer; }
 
 .roadmap { position: relative; padding-left: 30px; }
 .roadmap::before {

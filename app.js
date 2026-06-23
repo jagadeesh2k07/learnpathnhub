@@ -74,28 +74,37 @@ $("#courseProgress").innerHTML = SUBJECTS.map(s => {
 }
 let activeSubjectId = SUBJECTS[0].id;
 function renderCourses() {
-  $("#subjectList").innerHTML = SUBJECTS.map(s => `
+$("#subjectList").innerHTML = SUBJECTS.map(s => `
     <button class="subject-btn ${s.id === activeSubjectId ? "active" : ""}" data-id="${s.id}">
       <span class="em">${s.emoji}</span>
       <div class="info">
         <div class="n">${s.name}</div>
+        <div class="pct">${s.progress}% complete</div>
         <div class="progress" style="margin-top:6px"><span style="width:${s.progress}%"></span></div>
       </div>
     </button>`).join("");
   $$("#subjectList .subject-btn").forEach(b => b.addEventListener("click", () => {
     activeSubjectId = b.dataset.id; renderCourses();
   }));
+}
 
   const sub = SUBJECTS.find(s => s.id === activeSubjectId);
+  const watchedCount = sub.topics.flatMap(t => t.videos).filter(v => v.watched).length;
+  const totalVideos = sub.topics.flatMap(t => t.videos).length;
+
   $("#subjectDetail").innerHTML = `
     <div class="card" style="margin-bottom:16px">
-      <div style="display:flex;align-items:center;gap:14px">
-        <span style="font-size:32px">${sub.emoji}</span>
-        <div style="flex:1"><h3 style="margin:0;font-size:18px">${sub.name}</h3>
-          <div style="color:var(--muted);font-size:13px">${sub.topics.length} topics · ${sub.progress}% complete</div></div>
-        <span class="tag green">In progress</span>
+      <div class="subject-hero">
+        <span class="em-big">${sub.emoji}</span>
+        <div style="flex:1">
+          <h3>${sub.name}</h3>
+          <div class="sub-meta">${sub.topics.length} topics · ${watchedCount}/${totalVideos} videos watched</div>
+          <div class="subject-progress" style="margin-top:10px">
+            <div class="progress"><span style="--fill:${sub.progress}%;width:0" class="filled"></span></div>
+          </div>
+        </div>
+        <span class="tag green">${sub.progress}% done</span>
       </div>
-      <div class="progress" style="margin-top:14px"><span style="width:${sub.progress}%"></span></div>
     </div>
     <div class="tabs">
       ${sub.topics.map((t,i) => `<div class="tab ${i===0?"active":""}" data-tab="${t.id}">${t.title}</div>`).join("")}
@@ -103,13 +112,13 @@ function renderCourses() {
     ${sub.topics.map((t,i) => `
       <div class="tab-panel ${i===0?"active":""}" data-panel="${t.id}">
         <div class="card" style="margin-bottom:14px">
-          <h3>▶ Videos</h3>
+          <h3>▶ Videos <span style="color:var(--muted);font-size:13px;font-weight:400">(${t.videos.filter(v=>v.watched).length}/${t.videos.length} watched)</span></h3>
           <div class="list">
           ${t.videos.map(v => `
-            <div class="list-item">
-              <div class="thumb">▶</div>
+            <div class="list-item ${v.watched ? "watched" : ""}">
+              <div class="thumb ${v.watched ? "" : "play"}">${v.watched ? "✓" : "▶"}</div>
               <div class="meta"><div class="t">${v.title}</div><div class="s">${v.duration}</div></div>
-              <span class="tag ${v.watched ? "green" : ""}">${v.watched ? "✓ Watched" : "Unwatched"}</span>
+              <span class="tag ${v.watched ? "green" : "blue"}">${v.watched ? "✓ Done" : "Watch"}</span>
             </div>`).join("")}
           </div>
         </div>
@@ -117,7 +126,7 @@ function renderCourses() {
       </div>`).join("")}
   `;
   bindTabs($("#subjectDetail"));
-}
+
 function renderJourney() {
   $("#journeyRoadmap").innerHTML = `
     <div class="roadmap">
