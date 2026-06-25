@@ -130,11 +130,26 @@ $("#subjectList").innerHTML = SUBJECTS.map(s => `
 function renderJourney() {
   $("#journeyRoadmap").innerHTML = `
     <div class="roadmap">
-      <div class="milestone done"><div class="t">Foundations</div><div class="s">Year 1 — Completed</div></div>
-      <div class="milestone done"><div class="t">Core CS Concepts</div><div class="s">Year 2 Sem 1 — In progress</div></div>
-      <div class="milestone"><div class="t">Specialization</div><div class="s">Year 2 Sem 2 — Up next</div></div>
-      <div class="milestone upcoming"><div class="t">Advanced & Electives</div><div class="s">Year 3 — Upcoming</div></div>
-      <div class="milestone upcoming"><div class="t">Capstone Project</div><div class="s">Year 4 — Future</div></div>
+      <div class="milestone done" data-step="1">
+        <div class="t">Foundations</div>
+        <div class="s">Year 1 — Completed</div>
+      </div>
+      <div class="milestone active-step" data-step="2">
+        <div class="t">Core CS Concepts</div>
+        <div class="s">Year 2 Sem 1 — Currently in progress</div>
+      </div>
+      <div class="milestone" data-step="3">
+        <div class="t">Specialization</div>
+        <div class="s">Year 2 Sem 2 — Up next</div>
+      </div>
+      <div class="milestone upcoming" data-step="4">
+        <div class="t">Advanced & Electives</div>
+        <div class="s">Year 3 — Upcoming</div>
+      </div>
+      <div class="milestone upcoming" data-step="5">
+        <div class="t">Capstone Project</div>
+        <div class="s">Year 4 — Future</div>
+      </div>
     </div>`;
 
   $("#journeyCompleted").innerHTML = JOURNEY.completed.map(c => `
