@@ -403,7 +403,9 @@ img { max-width: 100%; display: block; }
   border-bottom: 2px solid transparent;
   margin-bottom: -1px;
   transition: color var(--speed) var(--ease), border-color var(--speed) var(--ease);
+  cursor: pointer;
 }
+.tab:hover { color: var(--text); }
 .tab.active {
   color: var(--primary-dark);
   border-bottom-color: var(--primary);
@@ -605,6 +607,51 @@ img { max-width: 100%; display: block; }
   font-family: var(--font-mono);
   font-weight: 600;
   font-size: 14px;
+}
+
+/* Assignments page */
+.assign-empty {
+  text-align: center;
+  padding: 32px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.list-item .btn {
+  flex-shrink: 0;
+  padding: 7px 14px;
+  font-size: 12px;
+}
+
+.due-soon {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.score-ring {
+  position: relative;
+  width: 54px; height: 54px;
+  flex-shrink: 0;
+}
+.score-ring svg {
+  transform: rotate(-90deg);
+  width: 54px; height: 54px;
+}
+.score-ring .ring-bg  { fill: none; stroke: var(--surface-2); stroke-width: 4; }
+.score-ring .ring-fill {
+  fill: none;
+  stroke-width: 4;
+  stroke-linecap: round;
+  transition: stroke-dashoffset .6s var(--ease);
+}
+.score-ring .ring-label {
+  position: absolute;
+  inset: 0;
+  display: grid; place-items: center;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
 }
 
 .menu-toggle { display: none; }

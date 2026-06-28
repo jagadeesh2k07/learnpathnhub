@@ -192,18 +192,42 @@ function renderAssignments() {
   const pending = ASSIGNMENTS.filter(a => a.status === "pending");
   const completed = ASSIGNMENTS.filter(a => a.status === "completed");
 
-  $("#assignPending").innerHTML = pending.map(a => `
-    <div class="list-item">
+const today = new Date();
+
+  $("#assignPending").innerHTML = pending.length ? pending.map(a => {
+    const due = new Date(a.due);
+    const daysLeft = Math.ceil((due - today) / (1000*60*60*24));
+    const urgent = daysLeft <= 3;
+    return `<div class="list-item">
       <div class="thumb">${a.type === "Quiz" ? "❓" : "📝"}</div>
-      <div class="meta"><div class="t">${a.title}</div><div class="s">${a.subject} · Due ${a.due} · ${a.total} pts</div></div>
+      <div class="meta">
+        <div class="t">${a.title}</div>
+        <div class="s">${a.subject} · <span class="${urgent ? "due-soon" : ""}">Due ${a.due}${urgent ? " ⚠️" : ""}</span> · ${a.total} pts</div>
+      </div>
       <button class="btn">Start</button>
-    </div>`).join("");
+    </div>`;
+  }).join("") : `<div class="assign-empty">🎉 No pending assignments!</div>`;
 
   $("#assignCompleted").innerHTML = completed.map(a => {
     const pct = Math.round(a.score/a.total*100);
+    const color = pct >= 85 ? "var(--success)" : pct >= 70 ? "var(--accent-dark)" : "var(--warning)";
+    const r = 23, circ = 2 * Math.PI * r;
+    const offset = circ - (pct / 100) * circ;
     return `<div class="list-item">
-      <div class="score">${pct}%</div>
-      <div class="meta"><div class="t">${a.title}</div><div class="s">${a.subject} · ${a.score}/${a.total} · ${a.due}</div></div>
+      <div class="score-ring">
+        <svg viewBox="0 0 54 54">
+          <circle class="ring-bg" cx="27" cy="27" r="${r}"/>
+          <circle class="ring-fill" cx="27" cy="27" r="${r}"
+            stroke="${color}"
+            stroke-dasharray="${circ}"
+            stroke-dashoffset="${offset}"/>
+        </svg>
+        <div class="ring-label">${pct}%</div>
+      </div>
+      <div class="meta">
+        <div class="t">${a.title}</div>
+        <div class="s">${a.subject} · ${a.score}/${a.total} pts · ${a.due}</div>
+      </div>
       <span class="tag ${pct>=85?"green":pct>=70?"blue":"amber"}">${a.type}</span>
     </div>`;
   }).join("");
