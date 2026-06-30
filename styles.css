@@ -644,7 +644,6 @@ img { max-width: 100%; display: block; }
   font-size: 14px;
 }
 
-/* Assignments page */
 .assign-empty {
   text-align: center;
   padding: 32px;
@@ -701,4 +700,95 @@ img { max-width: 100%; display: block; }
   .menu-toggle { display: grid; }
   .search { display: none; }
   .content { padding: 16px; }
+}
+
+body.dark {
+  --bg: #1a1612;
+  --surface: #221d18;
+  --surface-2: #2c2620;
+  --text: #f0ebe2;
+  --muted: #9c9286;
+  --border: #3a332b;
+
+  --primary: #e08d2b;
+  --primary-dark: #f0a648;
+  --primary-soft: #3d2f1a;
+  --accent: #2a3a4a;
+  --accent-dark: #6fa3d4;
+}
+
+body.dark .topbar {
+  background: rgba(26, 22, 18, 0.85);
+}
+
+body.dark .hero,
+body.dark .profile-header {
+  background: linear-gradient(135deg, #3d2f1a, #1f2937);
+}
+
+body.dark .hero p,
+body.dark .profile-header p {
+  color: #d8c9a8;
+}
+
+body.dark .hero .badge {
+  background: #2c2620;
+  color: var(--primary-dark);
+}
+
+body.dark .brand-logo,
+body.dark .avatar {
+  color: white;
+}
+
+body.dark ::-webkit-scrollbar-track { background: var(--bg); }
+body.dark ::-webkit-scrollbar-thumb { background: var(--border); }
+
+body, body.dark .sidebar, body.dark .card, body.dark .stat {
+  transition: background var(--speed) var(--ease), color var(--speed) var(--ease), border-color var(--speed) var(--ease);
+}
+body.dark .sidebar {
+  background: var(--surface);
+  border-right-color: var(--border);
+}
+
+body.dark .topbar {
+  background: rgba(34, 29, 24, 0.85);
+}
+
+body.dark .card,
+body.dark .stat,
+body.dark .list-item,
+body.dark .subject-btn,
+body.dark .milestone::before {
+  background: var(--surface);
+}
+
+body.dark .list-item:hover,
+body.dark .subject-btn:hover,
+body.dark .nav-item:hover,
+body.dark .icon-btn:hover,
+body.dark .milestone:hover {
+  background: var(--surface-2);
+}
+
+body.dark .search {
+  background: var(--surface-2);
+}
+body.dark .search:focus-within {
+  background: var(--surface);
+}
+
+body.dark .thumb,
+body.dark .score,
+body.dark .score-ring .ring-bg {
+  background: var(--surface-2);
+}
+
+body.dark .progress {
+  background: var(--surface-2);
+}
+
+body.dark .slider {
+  background: #4a4038;
 }
