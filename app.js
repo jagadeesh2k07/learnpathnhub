@@ -282,7 +282,21 @@ function renderProfile() {
     <div class="note"><div class="t">${d.q}</div><div class="b">${d.subject} · ${d.answered?"Answered":"Open"}</div><div class="d">${d.date}</div></div>
   `).join("");
 }
+function applyDarkMode(on) {
+  document.body.classList.toggle("dark", on);
+  localStorage.setItem("learnkit-dark", on ? "1" : "0");
+}
+function initDarkMode() {
+  const saved = localStorage.getItem("learnkit-dark") === "1";
+  applyDarkMode(saved);
+  const toggle = $("#darkModeToggle");
+  if (toggle) {
+    toggle.checked = saved;
+    toggle.addEventListener("change", () => applyDarkMode(toggle.checked));
+  }
+}
 document.addEventListener("DOMContentLoaded", () => {
+  initDarkMode();
   window.addEventListener("scroll", () => {
   $(".topbar").classList.toggle("scrolled", window.scrollY > 4);
   });
