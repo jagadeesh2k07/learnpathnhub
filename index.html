@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="app">
-  <!-- Sidebar -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
   <aside class="sidebar" id="sidebar">
     <div class="brand">
       <div class="brand-logo">LK</div>
@@ -39,7 +39,6 @@
     </div>
   </aside>
 
-  <!-- Main -->
   <div class="main">
     <header class="topbar">
       <div style="display:flex;align-items:center;gap:12px">
@@ -57,7 +56,6 @@
 
     <div class="content">
 
-      <!-- HOME -->
       <section class="page active" data-page="home">
         <div class="hero" id="homeHero"></div>
         <div class="grid grid-4" id="homeStats" style="margin-bottom:22px"></div>
@@ -68,7 +66,6 @@
         <div class="card" style="margin-top:18px"><h3>Pending Assignments & Quizzes</h3><div class="list" id="pendingTasks"></div></div>
       </section>
 
-      <!-- COURSES -->
       <section class="page" data-page="courses">
         <div class="page-header">
           <h1>Courses</h1>
@@ -80,7 +77,6 @@
         </div>
       </section>
 
-      <!-- JOURNEY -->
       <section class="page" data-page="journey">
         <div class="page-header">
           <h1>Your Journey</h1>
@@ -107,7 +103,6 @@
         </div>
       </section>
 
-      <!-- ASSIGNMENTS -->
       <section class="page" data-page="assignments">
         <div class="page-header">
           <h1>Assignments & Quizzes</h1>
@@ -123,7 +118,6 @@
         <div class="tab-panel" data-panel="analysis"><div class="card"><h3>Performance by Subject</h3><div id="assignAnalysis"></div></div></div>
       </section>
 
-      <!-- PROFILE -->
       <section class="page" data-page="profile">
         <div class="profile-header" id="profileHeader"></div>
         <div class="grid grid-4" id="profileStats" style="margin-bottom:22px"></div>
