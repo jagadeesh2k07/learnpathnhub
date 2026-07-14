@@ -1,4 +1,4 @@
-# Offline Learning Kit for Rural Students — Tablet OS Interface 📱💡
+# Offline Learning Kit for the Rural Students — Tablet OS Interface 📱💡
 
 An high-performance, self-contained digital educational ecosystem engineered specifically to serve as the core interactive tablet user interface (UI) included within physical offline learning kits. Developed under **UN SDG Goal No. 4: Quality Education**, this client-side software stack is deployed directly onto standalone tablets distributed to students in resource-constrained, internet-isolated rural communities.
 
